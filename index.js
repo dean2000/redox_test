@@ -12,7 +12,7 @@ app.listen(80, function() {
 });
 
 app.get('/', function(req, res) {
-    req.send('Hello World');
+    res.send('Hello World');
 });
 
 app.get('/destination', function(req, res) {
@@ -22,9 +22,10 @@ app.get('/destination', function(req, res) {
     }
 
     console.log('Destination not verified by token');
-    req.sendStatus(400);
+    res.sendStatus(400);
 });
 
 app.post('/destination', function(req, res) {
     console.log(req.body);
 })
+
