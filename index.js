@@ -16,7 +16,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/destination', function(req, res) {
-    if (req.headers['verification_token'] === DESTINATION_VERIFICATION_TOKEN) {
+    if (req.headers['verification-token'] === DESTINATION_VERIFICATION_TOKEN) {
         console.log('Destination verified by token');
         return res.send(req.query.challenge);
     }
