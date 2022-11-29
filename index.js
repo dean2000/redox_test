@@ -3,6 +3,8 @@ var app = express();
 var bodyParser = require('body-parser');
 var request = require('request');
 
+var DESTINATION_VERIFICATION_TOKEN = '123456'
+
 app.use(bodyParser.json());
 
 app.listen(80, function() {
@@ -12,3 +14,17 @@ app.listen(80, function() {
 app.get('/', function(req, res) {
     req.send('Hello World');
 });
+
+app.get('/destination', function(req, res) {
+    if (req.headers['verification_token'] === DESTINATION_VERIFICATION_TOKEN) {
+        console.log('Destination verified by token');
+        return res.send(req.query.challenge);
+    }
+
+    console.log('Destination not verified by token');
+    req.sendStatus(400);
+});
+
+app.post('/destination', function(req, res) {
+    console.log(req.body);
+})
